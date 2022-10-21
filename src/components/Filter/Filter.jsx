@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { Label } from './Filter.styled';
 
 function Filter({handleChangeFilter, value}) {
-  return (<label>Find contacts by name<input type='text' value={value} onChange={handleChangeFilter}/></label>)
+  return (<Label>Find contacts by name<input type='text' value={value} onChange={handleChangeFilter}/></Label>)
 };
 
 Filter.propTypes = {
