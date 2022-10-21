@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types';
 
-function Contact({contacts}) {
-  return contacts.map(contact =>
-    <li key={contact.id}>
-      <span>{contact.name}:</span>
-      <span>{contact.number}</span>
-    </li>
-  )
+function Contact({name, number}) {
+  return (<li>
+      <span>{name}:</span>
+      <span>{number}:</span>
+    </li>)
 };
 
 Contact.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 }
 
 export default Contact;

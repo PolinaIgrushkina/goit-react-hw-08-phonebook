@@ -1,52 +1,50 @@
-import { nanoid } from "nanoid";
 import { Component } from "react";
-import Contact from './Contact/Contact';
+import ContactsList from "./ContactsList/ContactsList";
 import Form from "./Form/Form";
+import Filter from "./Filter/Filter";
+import { nanoid } from "nanoid";
 
 export class App extends Component  {
   state = {
-  contacts: [],
-  name: '',
-  number: '',
+    contacts: [
+    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+    ],
+    filter: '',
   }
 
-  handleChangeInput = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-  
-  handleSubmit = (event) => {
-    event.preventDefault();
-    
+  handleSubmit = (name, number) => { 
     this.setState(prevState => {
       return {
         contacts: [...prevState.contacts,
-          { name: this.state.name, number: this.state.number, id: nanoid(), }
+        { name, number, id: nanoid(), }
         ]
       }
-    });
- 
-    this.reset();
+    })
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
-  
+  handleChangeFilter = (event) => {
+    this.setState({ filter: event.target.value });
+  }
+
+  // getFilteredContacts = () => {
+  //   this.setState()
+  // }
+
   render() {
-    return <div>
+    const normalizedFilter = this.state.filter.toLowerCase();
+  
+    const filteredContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
 
-      <section>
-      <h2>Phonebook</h2>
-        <Form number={this.state.number} name={this.state.name} handleSubmit={this.handleSubmit} handleChangeInput={this.handleChangeInput}/>
-      </section>
+    return <div>
+      <h1>Phonebook</h1>
+      <Form onSubmit={this.handleSubmit} />
       
-      <section>
       <h2>Contacts</h2>
-      <ul>
-        <Contact contacts={this.state.contacts} />
-      </ul>
-      </section>
+      <Filter value={this.state.filter} handleChangeFilter={this.handleChangeFilter} />
+      <ContactsList contacts={filteredContacts} />
     </div>
   }
 };
