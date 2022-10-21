@@ -13,6 +13,7 @@ return (
 
   ContactsList.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onDeleteUser: PropTypes.func.isRequired,
   };
 
 export default ContactsList;
