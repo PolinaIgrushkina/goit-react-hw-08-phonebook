@@ -16,26 +16,24 @@ export class App extends Component  {
   }
 
   handleSubmit = (name, number) => { 
-    this.setState(prevState => {
+    this.state.contacts.find(contact => contact.name === name)  
+    ? alert(`${name} is already in contacts`)
+    : this.setState(prevState => {
       return {
         contacts: [...prevState.contacts,
         { name, number, id: nanoid(), }
         ]
       }
     })
+
   };
 
   handleChangeFilter = (event) => {
     this.setState({ filter: event.target.value });
   }
 
-  // getFilteredContacts = () => {
-  //   this.setState()
-  // }
-
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
-  
     const filteredContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
 
     return <div>

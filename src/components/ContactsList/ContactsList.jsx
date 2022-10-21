@@ -15,4 +15,5 @@ function ContactsList({ contacts }) {
     contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
-  export default ContactsList;
+export default ContactsList;
+  
