@@ -4,6 +4,8 @@ import Form from "./Form/Form";
 import Filter from "./Filter/Filter";
 import { nanoid } from "nanoid";
 
+const CONTACTS_LS_KEY = 'contacts';
+
 export class App extends Component  {
   state = {
     contacts: [
@@ -13,6 +15,24 @@ export class App extends Component  {
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
+  }
+
+  componentDidMount() {
+    const contacts = localStorage.getItem(CONTACTS_LS_KEY);
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const newContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
+
+    if (newContacts !== prevContacts) {
+      localStorage.setItem(CONTACTS_LS_KEY, JSON.stringify(newContacts));
+    }
   }
 
   handleSubmit = (name, number) => { 
