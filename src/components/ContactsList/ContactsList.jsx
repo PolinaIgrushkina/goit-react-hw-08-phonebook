@@ -1,20 +1,22 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getFilteredContacts } from 'redux/Filter/selector';
 import Contact from '../Contact/Contact';
 
-function ContactsList({ contacts, onDeleteUser }) {
-return (
+function ContactsList() {
+  const contacts = useSelector(getFilteredContacts);
+
+  return (
     <ul>
       {contacts.map(contact => (
-        <Contact key={contact.id} name={contact.name} number={contact.number} id={contact.id} onDeleteUser={onDeleteUser} />
+        <Contact
+          key={contact.id}
+          name={contact.name}
+          number={contact.number}
+          id={contact.id}
+        />
       ))}
     </ul>
-  )
-};
-
-  ContactsList.propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onDeleteUser: PropTypes.func.isRequired,
-  };
+  );
+}
 
 export default ContactsList;
-  
