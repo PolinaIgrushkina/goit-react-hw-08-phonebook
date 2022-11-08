@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { FormSlyled, Label, Button } from './Form.styled';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/ContactList/slice.contactList';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/ContactList/operations';
+import { selectorContacts } from 'redux/selectors';
 
 function Form() {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectorContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -26,9 +28,9 @@ function Form() {
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    dispatch(addContact({ name, number }));
-
+    contacts.find(contact => contact.name === name)
+      ? alert(`${name} is already in contacts`)
+      : dispatch(addContact({ name, phone: number }));
     reset();
   };
 
