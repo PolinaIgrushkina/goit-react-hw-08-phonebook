@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormSlyled, Label, Button } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/ContactList/operations';
+import { addContact } from '../../redux/ContactList/contacts-operations';
 import { selectorContacts } from 'redux/selectors';
 
 function Form() {

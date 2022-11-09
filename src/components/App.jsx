@@ -1,29 +1,52 @@
-import ContactsList from './ContactsList/ContactsList';
-import Form from './Form/Form';
-import Filter from './Filter/Filter';
-import { fetchContacts } from 'redux/ContactList/operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { selectorError, selectorIsLoading } from 'redux/selectors';
+import AppBar from './AppBar/AppBar';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
+import RegisterView from 'views/RegisterView/RegisterView';
+import LoginView from 'views/LoginView/LoginView';
+import { Route, Routes } from 'react-router-dom';
+import ContactsView from 'views/ContactsView/ContactsView';
+import HomeView from 'views/HomeView/HomeView';
 
 export function App() {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectorIsLoading);
-  const error = useSelector(selectorError);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
     <div>
-      <h1>Phonebook</h1>
-      <Form />
+      <AppBar />
 
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactsList />
+      <Routes>
+        <Route path="/" element={<HomeView />}></Route>
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute
+              exact
+              path="/register"
+              redirectTo="/contacts"
+              restricted
+            >
+              <RegisterView />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
+              <LoginView />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <ContactsView />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </div>
   );
 }
