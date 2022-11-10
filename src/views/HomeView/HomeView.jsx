@@ -1,5 +1,6 @@
 import React from 'react';
+import { DivStyled } from './HomeView.styled';
 
 export default function HomeView() {
-  return <div>HomeView</div>;
+  return <DivStyled>To see your contacts, please login or signup.</DivStyled>;
 }

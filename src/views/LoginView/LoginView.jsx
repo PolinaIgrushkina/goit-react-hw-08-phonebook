@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/Auth/auth-operations';
+import { Button, DivStyled, Form, Label } from './LoginView.styled';
 
 export default function LoginView() {
   const dispatch = useDispatch();
@@ -26,32 +27,34 @@ export default function LoginView() {
   };
 
   return (
-    <div>
-      <h1>If you have account, please, Log In.</h1>
+    <DivStyled>
+      <h3>If you have account, please, Log In.</h3>
 
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label>
+      <Form onSubmit={handleSubmit} autoComplete="off">
+        <Label>
           E-mail
           <input
             type="email"
             name="email"
             value={email}
             onChange={handleChange}
+            placeholder="example@mail.com"
           />
-        </label>
+        </Label>
 
-        <label>
+        <Label>
           Password
           <input
             type="password"
             name="password"
             value={password}
             onChange={handleChange}
+            placeholder="7 and more symbols"
           />
-        </label>
+        </Label>
 
-        <button type="submit">LogIn</button>
-      </form>
-    </div>
+        <Button type="submit">LogIn</Button>
+      </Form>
+    </DivStyled>
   );
 }
