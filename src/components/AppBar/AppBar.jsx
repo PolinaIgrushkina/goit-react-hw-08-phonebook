@@ -13,7 +13,6 @@ export default function AppBar() {
       {isLoggedIn ? (
         <div>
           <UserMenu />
-          <NavLink to="/contacts">Contacts</NavLink>
         </div>
       ) : (
         <DivStyled>

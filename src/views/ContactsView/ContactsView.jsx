@@ -5,6 +5,7 @@ import { fetchContacts } from 'redux/ContactList/contacts-operations';
 import Filter from 'components/Filter/Filter';
 import ContactsList from 'components/ContactsList/ContactsList';
 import Form from 'components/Form/Form';
+import { DivStyled } from './ContactsView.styled';
 
 export default function ContactsView() {
   const dispatch = useDispatch();
@@ -16,14 +17,14 @@ export default function ContactsView() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
+    <DivStyled>
+      <h3>Phonebook</h3>
       <Form />
 
-      <h2>Contacts</h2>
+      <h3>Contacts</h3>
       <Filter />
       {isLoading && !error && <b>Request in progress...</b>}
       <ContactsList />
-    </div>
+    </DivStyled>
   );
 }
