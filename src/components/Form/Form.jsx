@@ -30,7 +30,7 @@ function Form() {
     event.preventDefault();
     contacts.find(contact => contact.name === name)
       ? alert(`${name} is already in contacts`)
-      : dispatch(addContact({ name, phone: number }));
+      : dispatch(addContact({ name, number }));
     reset();
   };
 

@@ -5,5 +5,12 @@ export const Button = styled.button`
   color: white;
   border: 1px solid transparent;
   border-radius: 4px;
-  margin-left: 10px;
+`;
+
+export const Item = styled.li`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 5px;
 `;
